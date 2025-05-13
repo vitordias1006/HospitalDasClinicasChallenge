@@ -29,7 +29,7 @@ public class Agendamento {
 
 	public String getDataAgendamento() {
 		return dataAgendamento;
-	}m
+	}
 
 	public void setDataAgendamento(String dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;

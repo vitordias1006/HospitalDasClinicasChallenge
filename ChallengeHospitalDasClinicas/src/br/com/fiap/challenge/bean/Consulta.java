@@ -64,6 +64,9 @@ public class Consulta {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+
 	
 	
 }

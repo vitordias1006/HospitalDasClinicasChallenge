@@ -31,7 +31,11 @@ public class Pessoa  {
 		this.telefone = telefone;
 	}
 	
-	
+	public String cadastro(String nome, String telefone){
+		this.nome = nome;
+		this.telefone = telefone;
+		return "Cadastro realizado com sucesso: " + this.nome;
+	}
 
 	
 }

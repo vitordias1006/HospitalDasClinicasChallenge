@@ -10,8 +10,8 @@ public class Medico extends Pessoa {
 		
 	}
 
-	public Medico(String crm, Especialidade especialidade) {
-		super();
+	public Medico(String nome, String crm, Especialidade especialidade) {
+		super.setNome(nome);
 		this.crm = crm;
 		this.especialidade = especialidade;
 	}
@@ -31,9 +31,6 @@ public class Medico extends Pessoa {
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
-	
-	
-	
-	
+
 
 }

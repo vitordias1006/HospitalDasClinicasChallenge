@@ -1,6 +1,6 @@
 package br.com.fiap.challenge.bean;
 
-public class Usuario {
+public class Usuario extends Pessoa{
 
 	private String cpf;
 	
@@ -10,8 +10,8 @@ public class Usuario {
 		
 	}
 
-	public Usuario(String cpf, String telefone) {
-		super();
+	public Usuario(String nome, String cpf, String telefone) {
+		super.setNome(nome);
 		this.cpf = cpf;
 		this.telefone = telefone;
 	}
@@ -31,6 +31,12 @@ public class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
+	public String cadastro(String cpf, String telefone){
+		this.cpf = cpf;
+		this.telefone = telefone;
+		return "Cadastro realizado com sucesso " + super.getNome();
+	}
+
 	
 }
