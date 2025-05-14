@@ -1,13 +1,14 @@
 package br.com.fiap.challenge.bean;
 
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class HorarioDisponivel {
 
-    private Medico medico;
+    private Especialidade especialidade;
 
-    private String data;
+    private LocalDate data;
 
     private LocalTime horarioConsulta;
 
@@ -17,14 +18,14 @@ public class HorarioDisponivel {
 
     private boolean disponivel = true;
 
+
     public HorarioDisponivel() {
 
     }
 
-    public HorarioDisponivel(Medico medico, String data, LocalTime horarioConsulta, LocalTime inicioExpediente, LocalTime fimExpediente, boolean disponivel) {
+    public HorarioDisponivel(Especialidade especialidade, LocalDate data, LocalTime horarioConsulta, LocalTime inicioExpediente, LocalTime fimExpediente, boolean disponivel) {
 
-        super();
-        this.medico = medico;
+        this.especialidade = especialidade;
         this.data = data;
         this.horarioConsulta = horarioConsulta;
         this.inicioExpediente = inicioExpediente;
@@ -32,19 +33,19 @@ public class HorarioDisponivel {
         this.disponivel = disponivel;
     }
 
-    public Medico getMedico() {
-        return medico;
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -60,7 +61,7 @@ public class HorarioDisponivel {
         return inicioExpediente;
     }
 
-    public void setHoraInicio(LocalTime inicioExpediente) {
+    public void setInicioExpediente(LocalTime inicioExpediente) {
         this.inicioExpediente = inicioExpediente;
     }
 
@@ -68,7 +69,7 @@ public class HorarioDisponivel {
         return fimExpediente;
     }
 
-    public void setHoraFim(LocalTime fimExpediente) {
+    public void setFimExpediente(LocalTime fimExpediente) {
         this.fimExpediente = fimExpediente;
     }
 
@@ -80,15 +81,17 @@ public class HorarioDisponivel {
         this.disponivel = disponivel;
     }
 
-    public boolean marcarConsula(Especialidade especialidade, String data, LocalTime horarioConsulta) {
-
+    public String marcarConsulta(String especialidade, LocalDate data, LocalTime horarioConsulta) {
         if (horarioConsulta.isBefore(inicioExpediente) || horarioConsulta.isAfter(fimExpediente)) {
-            System.out.println("Horario inválido, certifique-se de escolher um horário entre 10:00 e 18:00");
-            return false;
+            return "Horário inválido, certifique-se de escolher um horário entre 10:00 e 18:00";
 
-        } else {
-            return disponivel;
 
+        } else if (!disponivel){
+            return "Horário já reservado.";
+
+
+        }else {
+            return "Horário marcado com sucesso!";
         }
 
     }

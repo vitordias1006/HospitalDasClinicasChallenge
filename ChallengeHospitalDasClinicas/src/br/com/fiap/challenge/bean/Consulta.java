@@ -1,5 +1,10 @@
 package br.com.fiap.challenge.bean;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Consulta {
 	
 	private long idConsulta;
@@ -8,20 +13,23 @@ public class Consulta {
 	
 	private Medico medico;
 
-	private String dataHora;
+	private LocalDate dataConsulta;
+
+	private LocalTime horaConsulta;
 	
 	private String status;
-	
+
+
 	public Consulta() {
 		
 	}
 
-	public Consulta(long idConsulta, Paciente paciente, Medico medico, String dataHora, String status) {
-		super();
+	public Consulta(long idConsulta, Paciente paciente, Medico medico,LocalDate dataConsulta, LocalTime horaConsulta, String status) {
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
 		this.medico = medico;
-		this.dataHora = dataHora;
+		this.dataConsulta = dataConsulta;
+		this.horaConsulta = horaConsulta;
 		this.status = status;
 	}
 
@@ -49,12 +57,20 @@ public class Consulta {
 		this.medico = medico;
 	}
 
-	public String getDataHora() {
-		return dataHora;
+	public LocalDate getDataConsulta() {
+		return dataConsulta;
 	}
 
-	public void setDataHora(String dataHora) {
-		this.dataHora = dataHora;
+	public void setDataConsulta(LocalDate dataConsulta) {
+		this.dataConsulta = dataConsulta;
+	}
+
+	public LocalTime getHoraConsulta() {
+		return horaConsulta;
+	}
+
+	public void setHoraConsulta(LocalTime horaConsulta) {
+		this.horaConsulta = horaConsulta;
 	}
 
 	public String getStatus() {
@@ -65,8 +81,8 @@ public class Consulta {
 		this.status = status;
 	}
 
+	public String marcarConsulta(Paciente paciente, LocalTime dataConsulta, LocalTime horaConsulta){
+		return "Consulta marcada para o dia " + dataConsulta + "as " + horaConsulta + "para o paciente: " + paciente;
+	}
 
-
-	
-	
 }

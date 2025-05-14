@@ -10,7 +10,7 @@ public class Pessoa  {
 		
 	}
 
-	public Pessoa(String nome, String cpf, String telefone) {
+	public Pessoa(String nome, String telefone) {
 		this.nome = nome;
 		this.telefone = telefone;
 	}

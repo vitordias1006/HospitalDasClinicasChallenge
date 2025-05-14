@@ -32,5 +32,13 @@ public class Medico extends Pessoa {
 		this.especialidade = especialidade;
 	}
 
+	public String cadastro(String nome, String crm, Especialidade especialidade){
+		super.setNome(nome);
+		this.crm = crm;
+		this.especialidade = especialidade;
+		return "O médico " + super.getNome() + "está registrado no site Conselho Federal de Medicina";
+
+
+	}
 
 }
