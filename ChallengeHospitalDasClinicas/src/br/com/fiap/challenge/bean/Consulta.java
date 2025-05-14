@@ -5,32 +5,37 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Consulta {
+public class Consulta{
 	
 	private long idConsulta;
 	
 	private Paciente paciente;
+
+	private Especialidade especialidade;
 	
 	private Medico medico;
 
 	private LocalDate dataConsulta;
 
 	private LocalTime horaConsulta;
-	
-	private String status;
+
+	private String comentario;
+
+	private int nota;
 
 
 	public Consulta() {
 		
 	}
 
-	public Consulta(long idConsulta, Paciente paciente, Medico medico,LocalDate dataConsulta, LocalTime horaConsulta, String status) {
+	public Consulta(long idConsulta, Especialidade especialidade, Paciente paciente, Medico medico,LocalDate dataConsulta, LocalTime horaConsulta, String comentario, int nota) {
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
 		this.medico = medico;
 		this.dataConsulta = dataConsulta;
 		this.horaConsulta = horaConsulta;
-		this.status = status;
+		this.comentario = comentario;
+		this.nota = nota;
 	}
 
 	public long getIdConsulta() {
@@ -39,6 +44,14 @@ public class Consulta {
 
 	public void setIdConsulta(long idConsulta) {
 		this.idConsulta = idConsulta;
+	}
+
+	public Especialidade getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(Especialidade especialidade) {
+		this.especialidade = especialidade;
 	}
 
 	public Paciente getPaciente() {
@@ -73,16 +86,35 @@ public class Consulta {
 		this.horaConsulta = horaConsulta;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getComentario() {
+		return comentario;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
-	public String marcarConsulta(Paciente paciente, LocalTime dataConsulta, LocalTime horaConsulta){
-		return "Consulta marcada para o dia " + dataConsulta + "as " + horaConsulta + "para o paciente: " + paciente;
+	public int getNota() {
+		return nota;
 	}
+
+	public void setNota(int nota) {
+		this.nota = nota;
+	}
+
+	public String marcarConsulta(String nomePaciente, LocalDate dataConsulta, LocalTime horaConsulta){
+		return "Consulta marcada para o dia " + dataConsulta + " as " + horaConsulta + " para o paciente: " + nomePaciente;
+	}
+
+	public void avaliar(){
+		this.nota = nota;
+		this.comentario = comentario;
+	}
+
+
+
+
+
+
 
 }

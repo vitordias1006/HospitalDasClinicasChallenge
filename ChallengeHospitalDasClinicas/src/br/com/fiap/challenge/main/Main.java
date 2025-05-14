@@ -1,9 +1,6 @@
 package br.com.fiap.challenge.main;
 
-import br.com.fiap.challenge.bean.Endereco;
-import br.com.fiap.challenge.bean.HorarioDisponivel;
-import br.com.fiap.challenge.bean.Paciente;
-import br.com.fiap.challenge.bean.Usuario;
+import br.com.fiap.challenge.bean.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -15,74 +12,132 @@ public class Main {
 
     public static void main(String[] args) {
 
-    String aux, nome, nomePaciente, telefone, cpf, crm, especialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
+        String aux, nome, nomePaciente, telefone, cpf, crm, especialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
 
-    int opcao, numero;
+        Agenda agenda = new Agenda();
 
-    LocalTime horarioConsulta, inicioExpediente, fimExpediente, horaConsulta;
+        int opcao, numero;
 
-    LocalDate dataConsulta, dataNascimento, data;
+        LocalTime horarioConsulta, inicioExpediente, fimExpediente, horaConsulta;
 
-    LocalDate dataAtual = LocalDate.now();
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataConsulta, dataNascimento, data;
 
-    while (escolha.equalsIgnoreCase("sim")){
-        try{
-            aux = JOptionPane.showInputDialog("O que deseja fazer em nosso site?\n 1.Cadastro de usuario\n 2. Horarios disponíveis para Consulta\n 3. Marcar Consulta\n 4. Ver Consulta\n 5. Ver Agenda de Consultas");
-            opcao = Integer.parseInt(aux);
+        LocalDate dataAtual = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            switch (opcao) {
-                case 1:
-                    Usuario usuario = new Usuario();
-                    nome = JOptionPane.showInputDialog("Digite o seu nome: ");
-                    cpf = JOptionPane.showInputDialog("Digite o seu cpf: ");
-                    telefone = JOptionPane.showInputDialog("Digite o seu telefone: ");
+        while (escolha.equalsIgnoreCase("sim")) {
+            try {
+                aux = JOptionPane.showInputDialog("O que deseja fazer em nosso site?\n 1. Cadastro de usuario \n 2. Horarios disponíveis para Consulta \n 3. Marcar Consulta\n 4. Ver Agenda de Consultas\n 5.Avaliar Consulta Médica");
+                opcao = Integer.parseInt(aux);
 
-                    usuario.setNome(nome);
-                    mensagem = usuario.cadastro(cpf, telefone);
+                switch (opcao) {
+                    case 1:
+                        Usuario usuario = new Usuario();
+                        nome = JOptionPane.showInputDialog("Digite o seu nome: ");
+                        cpf = JOptionPane.showInputDialog("Digite o seu cpf: ");
+                        telefone = JOptionPane.showInputDialog("Digite o seu telefone: ");
 
-                    JOptionPane.showMessageDialog(null, mensagem);
-                    break;
+                        usuario.setNome(nome);
+                        mensagem = usuario.cadastro(cpf, telefone);
 
-                case 2:
-                    HorarioDisponivel horarioDisponivel = new HorarioDisponivel();
-                    especialidade = JOptionPane.showInputDialog("Em qual especialidade quer ser atendido? ");
-                    aux = JOptionPane.showInputDialog("Insira o dia que deseja marcar consulta: (dd/MM/yyyy)");
-                    data = LocalDate.parse(aux, dtf);
-                    aux = JOptionPane.showInputDialog("Insira o horário que deseja realizar a consulta: (HH:MM)");
-                    horaConsulta = LocalTime.parse(aux);
+                        JOptionPane.showMessageDialog(null, mensagem);
+                        break;
 
-                    mensagem = horarioDisponivel.marcarConsulta(especialidade, data, horaConsulta);
+                    case 2:
+                        HorarioDisponivel horarioDisponivel = new HorarioDisponivel();
+                        especialidade = JOptionPane.showInputDialog("Em qual especialidade quer ser atendido? ");
+                        aux = JOptionPane.showInputDialog("Insira o dia que deseja marcar consulta: (dd/MM/yyyy)");
+                        data = LocalDate.parse(aux, dtf);
+                        aux = JOptionPane.showInputDialog("Insira o horário que deseja realizar a consulta: (HH:MM)");
+                        horaConsulta = LocalTime.parse(aux);
 
-                    JOptionPane.showMessageDialog(null, mensagem);
+                        mensagem = horarioDisponivel.marcarConsulta(especialidade, data, horaConsulta);
 
-                    break;
+                        JOptionPane.showMessageDialog(null, mensagem);
 
-                case 3:
-                    Paciente paciente = new Paciente();
-                    nomePaciente = JOptionPane.showInputDialog("Digite o nome do paciente: ");
-                    aux = JOptionPane.showInputDialog("Digite a data de nascimento do paciente: (dd/MM/yyyy)");
-                    dataNascimento = LocalDate.parse(aux, dtf);
-                    cpf = JOptionPane.showInputDialog("Digite o CPF do paciente: ");
-                    rua = JOptionPane.showInputDialog("Digite a rua de residência do paciente: ");
-                    aux = JOptionPane.showInputDialog("Digite o número da casa: ");
-                    numero = Integer.parseInt(aux);
-                    cep = JOptionPane.showInputDialog("Digite o cep da residência: ");
-                    bairro = JOptionPane.showInputDialog("Digite o bairro de residência: ");
-                    cidade = JOptionPane.showInputDialog("Digite a cidade onde vive: ");
+                        break;
+
+                    case 3:
+                        Paciente paciente = new Paciente();
+                        Consulta consulta1 = new Consulta();
+
+                        aux = JOptionPane.showInputDialog("Digite o nome do paciente: ");
+                        nomePaciente = aux;
+                        aux = JOptionPane.showInputDialog("Digite a data de nascimento do paciente: (dd/MM/yyyy)");
+                        dataNascimento = LocalDate.parse(aux, dtf);
+                        aux = JOptionPane.showInputDialog("Digite o CPF do paciente: ");
+                        cpf = aux;
+                        aux = JOptionPane.showInputDialog("Digite a rua de residência do paciente: ");
+                        rua = aux;
+                        aux = JOptionPane.showInputDialog("Digite o número da casa: ");
+                        numero = Integer.parseInt(aux);
+                        aux = JOptionPane.showInputDialog("Digite o cep da residência: ");
+                        cep = aux;
+                        aux = JOptionPane.showInputDialog("Digite o bairro de residência: ");
+                        bairro = aux;
+                        aux = JOptionPane.showInputDialog("Digite a cidade onde vive: ");
+                        cidade = aux;
+
+                        paciente.setNome(nomePaciente);
+
+                        aux = JOptionPane.showInputDialog("Para qual dia deseja marcar sua consulta?");
+                        dataConsulta = LocalDate.parse(aux, dtf);
+                        aux = JOptionPane.showInputDialog("Para que horas deseja marcar a sua consulta?");
+                        horaConsulta = LocalTime.parse(aux);
 
 
-                break;
+                        mensagem = consulta1.marcarConsulta(nomePaciente, dataConsulta, horaConsulta);
+                        JOptionPane.showMessageDialog(null, mensagem);
+                        agenda.adicionarConsulta(consulta1);
 
+                        break;
+
+                    case 4:
+
+
+                        break;
+
+
+                    case 5:
+                        Consulta consultaAvaliar = new Consulta();
+
+                        aux = JOptionPane.showInputDialog("Digite o nome do paciente:");
+                        nomePaciente = aux;
+
+                        aux = JOptionPane.showInputDialog("Digite a data da consulta: (dd/MM/yyyy)");
+                        dataConsulta = LocalDate.parse(aux);
+
+                        aux = JOptionPane.showInputDialog("Digite a hora da consulta: (HH:MM)");
+                        horaConsulta = LocalTime.parse(aux);
+
+                        aux = JOptionPane.showInputDialog("Digite uma nota de 1 até 5 para a consulta feita:");
+                        int nota = Integer.parseInt(aux);
+
+                        String comentario  = JOptionPane.showInputDialog("Se preferir também deixar um comentário deixe aqui:");
+
+
+
+
+
+
+                        break;
+
+                    default:
+
+                        throw new Exception("Opção inválida, tente novamente usando outra opção.");
+
+                }
+
+
+                escolha = JOptionPane.showInputDialog("Deseja continuar?");
+
+            } catch (Exception e) {
+
+                System.out.println(e.getMessage());
 
             }
 
-        } catch(Exception e) {
-
-
         }
-
-    }
 
 
     }
