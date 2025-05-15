@@ -91,7 +91,7 @@ public class HorarioDisponivel {
 
 
         }else {
-            return "Horário marcado com sucesso!";
+            return "Horário disponível, vá até a aba de consultas e marque a consulta desejada.";
         }
 
     }

@@ -106,9 +106,10 @@ public class Consulta{
 		return "Consulta marcada para o dia " + dataConsulta + " as " + horaConsulta + " para o paciente: " + nomePaciente;
 	}
 
-	public void avaliar(){
+	public void avaliar(int nota, String comentario){
 		this.nota = nota;
 		this.comentario = comentario;
+
 	}
 
 

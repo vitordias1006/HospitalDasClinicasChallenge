@@ -12,9 +12,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String aux, nome, nomePaciente, telefone, cpf, crm, especialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
+        String aux, nome, nomePaciente, telefone, cpf, nomeEspecialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
 
         Agenda agenda = new Agenda();
+
+        Especialidade especialidade = new Especialidade();
 
         int opcao, numero;
 
@@ -26,6 +28,7 @@ public class Main {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         while (escolha.equalsIgnoreCase("sim")) {
+
             try {
                 aux = JOptionPane.showInputDialog("O que deseja fazer em nosso site?\n 1. Cadastro de usuario \n 2. Horarios disponíveis para Consulta \n 3. Marcar Consulta\n 4. Ver Agenda de Consultas\n 5.Avaliar Consulta Médica");
                 opcao = Integer.parseInt(aux);
@@ -45,13 +48,13 @@ public class Main {
 
                     case 2:
                         HorarioDisponivel horarioDisponivel = new HorarioDisponivel();
-                        especialidade = JOptionPane.showInputDialog("Em qual especialidade quer ser atendido? ");
+                        nomeEspecialidade = JOptionPane.showInputDialog("Em qual especialidade quer ser atendido? ");
                         aux = JOptionPane.showInputDialog("Insira o dia que deseja marcar consulta: (dd/MM/yyyy)");
                         data = LocalDate.parse(aux, dtf);
                         aux = JOptionPane.showInputDialog("Insira o horário que deseja realizar a consulta: (HH:MM)");
                         horaConsulta = LocalTime.parse(aux);
 
-                        mensagem = horarioDisponivel.marcarConsulta(especialidade, data, horaConsulta);
+                        mensagem = horarioDisponivel.marcarConsulta(nomeEspecialidade, data, horaConsulta);
 
                         JOptionPane.showMessageDialog(null, mensagem);
 
@@ -80,32 +83,57 @@ public class Main {
 
                         paciente.setNome(nomePaciente);
 
+                        aux = JOptionPane.showInputDialog("Em qual especialidade deseja ser atendido?");
+                        Especialidade especialidade1 = new Especialidade();
+                        especialidade1.setNomeEspecialidade(aux);
+
                         aux = JOptionPane.showInputDialog("Para qual dia deseja marcar sua consulta?");
                         dataConsulta = LocalDate.parse(aux, dtf);
                         aux = JOptionPane.showInputDialog("Para que horas deseja marcar a sua consulta?");
                         horaConsulta = LocalTime.parse(aux);
 
 
+
                         mensagem = consulta1.marcarConsulta(nomePaciente, dataConsulta, horaConsulta);
                         JOptionPane.showMessageDialog(null, mensagem);
                         agenda.adicionarConsulta(consulta1);
+                        consulta1.setPaciente(paciente);
+                        consulta1.setDataConsulta(dataConsulta);
+                        consulta1.setHoraConsulta(horaConsulta);
+                        consulta1.setEspecialidade(especialidade1);
 
                         break;
 
                     case 4:
+                        Agenda agenda1;
+                        List<Consulta> consultas = agenda.listarConsultas();
 
+                        if (consultas.isEmpty()){
+                            JOptionPane.showMessageDialog(null, "Nenhuma consulta agendada.");
+                        } else {
+                            String agendaStr = "Consultas agendadas: \n";
+
+                            for (Consulta c : consultas) {
+                                agendaStr = agendaStr + "Paciente: " + c.getPaciente().getNome()+
+                                                        " |Data: " + c.getDataConsulta() +
+                                                        " |Hora: " + c.getHoraConsulta() +
+                                                        " |Especialidade: " + c.getEspecialidade().getNomeEspecialidade() +
+                                                        "\n";
+
+                            }
+                                JOptionPane.showMessageDialog(null, agendaStr);
+                        }
 
                         break;
 
 
                     case 5:
-                        Consulta consultaAvaliar = new Consulta();
 
                         aux = JOptionPane.showInputDialog("Digite o nome do paciente:");
                         nomePaciente = aux;
 
                         aux = JOptionPane.showInputDialog("Digite a data da consulta: (dd/MM/yyyy)");
-                        dataConsulta = LocalDate.parse(aux);
+                        dataConsulta = LocalDate.parse(aux, dtf);
 
                         aux = JOptionPane.showInputDialog("Digite a hora da consulta: (HH:MM)");
                         horaConsulta = LocalTime.parse(aux);
@@ -113,13 +141,10 @@ public class Main {
                         aux = JOptionPane.showInputDialog("Digite uma nota de 1 até 5 para a consulta feita:");
                         int nota = Integer.parseInt(aux);
 
-                        String comentario  = JOptionPane.showInputDialog("Se preferir também deixar um comentário deixe aqui:");
+                        String comentario = JOptionPane.showInputDialog("Se preferir também deixar um comentário deixe aqui:");
 
-
-
-
-
-
+                        mensagem = agenda.avaliarConsulta(nomePaciente, dataConsulta, horaConsulta, nota, comentario);
+                        JOptionPane.showMessageDialog(null, mensagem);
                         break;
 
                     default:
@@ -128,11 +153,9 @@ public class Main {
 
                 }
 
-
                 escolha = JOptionPane.showInputDialog("Deseja continuar?");
 
             } catch (Exception e) {
-
                 System.out.println(e.getMessage());
 
             }
