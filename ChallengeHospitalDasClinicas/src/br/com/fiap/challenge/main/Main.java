@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String aux, nome, nomePaciente, telefone, cpf, nomeEspecialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
+        String aux, nome, nomePaciente, telefone, cpf, crm, nomeEspecialidade, rua, bairro, estado, cidade, cep, responsavel, consulta, escolha = "sim", mensagem;
 
         Agenda agenda = new Agenda();
 
@@ -30,10 +30,11 @@ public class Main {
         while (escolha.equalsIgnoreCase("sim")) {
 
             try {
-                aux = JOptionPane.showInputDialog("O que deseja fazer em nosso site?\n 1. Cadastro de usuario \n 2. Horarios disponíveis para Consulta \n 3. Marcar Consulta\n 4. Ver Agenda de Consultas\n 5.Avaliar Consulta Médica");
+                aux = JOptionPane.showInputDialog("O que deseja fazer em nosso site?\n 1.Cadastro de Usuário\n 2. Registrar Médico \n 3. Horarios disponíveis para Consulta \n 4. Marcar Consulta\n 5. Ver Agenda de Consultas\n 6.Avaliar Consulta Médica");
                 opcao = Integer.parseInt(aux);
 
                 switch (opcao) {
+
                     case 1:
                         Usuario usuario = new Usuario();
                         nome = JOptionPane.showInputDialog("Digite o seu nome: ");
@@ -47,6 +48,27 @@ public class Main {
                         break;
 
                     case 2:
+                        Medico medico = new Medico();
+
+                        nome = JOptionPane.showInputDialog("Digite o nome do médico: ");
+                        crm = JOptionPane.showInputDialog("Digite o CRM do médico: ");
+                        telefone = JOptionPane.showInputDialog("Digite o telefone do médico: ");
+
+                        aux = JOptionPane.showInputDialog("Digite a especialidade do médico: ");
+                        Especialidade espMedico = new Especialidade();
+                        espMedico.setNomeEspecialidade(aux);
+
+                        medico.setNome(nome);
+                        medico.setCrm(crm);
+                        medico.setTelefone(telefone);
+                        medico.setEspecialidade(espMedico);
+
+                        JOptionPane.showMessageDialog(null, "Médico registrado com sucesso!");
+
+                        break;
+
+
+                    case 3:
                         HorarioDisponivel horarioDisponivel = new HorarioDisponivel();
                         nomeEspecialidade = JOptionPane.showInputDialog("Em qual especialidade quer ser atendido? ");
                         aux = JOptionPane.showInputDialog("Insira o dia que deseja marcar consulta: (dd/MM/yyyy)");
@@ -60,7 +82,7 @@ public class Main {
 
                         break;
 
-                    case 3:
+                    case 4:
                         Paciente paciente = new Paciente();
                         Consulta consulta1 = new Consulta();
 
@@ -104,7 +126,7 @@ public class Main {
 
                         break;
 
-                    case 4:
+                    case 5:
                         Agenda agenda1;
                         List<Consulta> consultas = agenda.listarConsultas();
 
@@ -127,7 +149,7 @@ public class Main {
                         break;
 
 
-                    case 5:
+                    case 6:
 
                         aux = JOptionPane.showInputDialog("Digite o nome do paciente:");
                         nomePaciente = aux;
