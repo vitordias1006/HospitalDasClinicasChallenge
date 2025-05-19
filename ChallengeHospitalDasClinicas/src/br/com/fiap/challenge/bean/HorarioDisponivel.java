@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 public class HorarioDisponivel {
 
-    private Especialidade especialidade;
+    private Consulta consulta;
 
     private LocalDate data;
 
@@ -23,9 +23,9 @@ public class HorarioDisponivel {
 
     }
 
-    public HorarioDisponivel(Especialidade especialidade, LocalDate data, LocalTime horarioConsulta, LocalTime inicioExpediente, LocalTime fimExpediente, boolean disponivel) {
+    public HorarioDisponivel(Consulta consulta, LocalDate data, LocalTime horarioConsulta, LocalTime inicioExpediente, LocalTime fimExpediente, boolean disponivel) {
 
-        this.especialidade = especialidade;
+        this.consulta = consulta;
         this.data = data;
         this.horarioConsulta = horarioConsulta;
         this.inicioExpediente = inicioExpediente;
@@ -33,12 +33,12 @@ public class HorarioDisponivel {
         this.disponivel = disponivel;
     }
 
-    public Especialidade getEspecialidade() {
-        return especialidade;
+    public Consulta getConsulta() {
+        return consulta;
     }
 
-    public void setEspecialidade(Especialidade especialidade) {
-        this.especialidade = especialidade;
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
     }
 
     public LocalDate getData() {
